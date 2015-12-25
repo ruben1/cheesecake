@@ -1,13 +1,7 @@
 var Cheesecake = {
-  model: {
-    Model: require('./Model.js')
-  },
-  viewController: {
-    ViewController: require('./ViewController.js')
-  },
-  mixin: {
-    Mixin: require('./Mixin.js')
-  }
+  model: require('./Model.js'),
+  viewController: require('./ViewController.js'),
+  mixin: require('./Mixin.js')
 };
 
 

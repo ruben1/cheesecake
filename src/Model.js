@@ -40,14 +40,12 @@ var ModelConstructor = function(state, eventHandlers, ParentModel, mixins) {
   this.childCallbacks = {};
   this.viewCallbacks = {};
 
-  var parent = Cheesecake.getComponent(ParentModel, 'model');
-  this.parent = parent || null;
-  
-  var model = Cheesecake.getComponent('Model', 'model');
-  if(model) {
-    model.call(this);    
+  if(parent) {
+    var parent = Cheesecake.getComponent(ParentModel, 'model');    
   }
+  this.parent = parent || null;
 
+  mixins = mixins || [];
   for(var i = 0; i < mixins.length; i++) {
     var mixin = Cheesecake.getComponent(mixins[i], 'mixin');
     if(mixin) {
@@ -57,9 +55,10 @@ var ModelConstructor = function(state, eventHandlers, ParentModel, mixins) {
 };
 
 Model.create = function(name, options) {
+  options = options || {};
   var model = new ModelConstructor(options.state, options.eventHandlers, options.ParentModel, options.mixins);
   try {
-    Cheesecake.registerComponent('model', name, model);  
+    Cheesecake.registerComponent(name, 'model', model);  
     return model;    
   } catch(e) {
     throw new Error('Component could not be registered');
